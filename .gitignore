@@ -2,3 +2,6 @@
 Thumbs.db
 .DS_Store
 artifact.html
+
+# Archivo de bloqueo que crea Excel mientras el libro está abierto
+~$*.xlsx

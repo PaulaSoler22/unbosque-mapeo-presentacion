@@ -1,76 +1,38 @@
-# Plantilla · Presentación de mapeo curricular
+# Universidad El Bosque · Mapeo curricular
 
-Plantilla HTML para la presentación que **Simuladores de Negocios Colombia** lleva a los
-directores de programa y decanos de una facultad de ciencias económicas o administrativas.
+Presentación de **Simuladores de Negocios Colombia** para los directores de programa y decanos
+de la **Facultad de Ciencias Económicas y Administrativas** de la Universidad El Bosque.
 
-No presenta un simulador: muestra, pregrado por pregrado, **qué asignaturas del plan de
-estudios pueden trabajarse hoy con un simulador CompanyGame**, con cuál y en qué semestre.
+Muestra, programa por programa, qué asignaturas del plan de estudios pueden trabajarse hoy con
+un simulador CompanyGame o de Simuladores de Negocios Colombia, con cuál y en qué semestre.
 
-Para una presentación de bienvenida de un simulador concreto (FoodCompany, BusinessGlobal…),
-la plantilla es otra: `plantilla-presentacion/`.
+## Cifras de portada
 
----
+- **117 asignaturas** con simulador · **81** de aplicación directa · **36** como apoyo al curso
+- **27 simuladores** (21 CompanyGame + 6 SNC)
+- **10 programas**, semestres **1 a 6**
+- **3 asignaturas transversales** con encaje perfecto en los 10 programas
 
-## Empezar
+Fuente: `Universidad El Bosque - CG + otros simuladores SNC.xlsx` (revisado 2-oct-2026).
+Detalle, cifras completas y salvedades en `CLAUDE.md` (documento interno).
 
-1. Copia la carpeta y renómbrala `<universidad>-mapeo-presentacion/`.
-2. Sigue `INSTRUCCIONES.md`.
-
-El detalle completo —tokens, estructura de slides, paleta y criterio editorial— está en
-`CLAUDE.md`.
-
-## Estructura
-
-```
-plantilla-mapeo-curricular/
-├── index.html            la presentación entera (HTML + CSS + JS, sin dependencias)
-├── CLAUDE.md             documento de trabajo: tokens, slides, paleta, criterio editorial
-├── INSTRUCCIONES.md      la versión corta
-├── build-artifact.js     genera la versión publicable como Artifact de Claude
-└── assets/
-    ├── logo-sdn.png          logo blanco (portada y cierre)
-    ├── logo-sdn-color.png    logo a color (referencia de marca)
-    ├── cartelera.jpg         portafolio CompanyGame
-    └── avatares.png          avatares de IA
-```
-
-## Contenido — 13 slides con 5 programas (≈ 25–28 minutos)
+## Contenido — 18 slides
 
 1. Portada y contexto
-2. Cartelera de simuladores CompanyGame · **fijo**
+2. Cartelera de simuladores
 3. Lo que ya se puede hacer hoy
 4. Alcance por programa
-5. **Ficha por programa** — bloque repetible, una por pregrado
-6. Asignaturas transversales · condicional
-7. Los tres modelos de uso docente (A / B / C) · **fijo**
-8. Evidencia de aprendizaje y acreditación
-9. Cierre y contacto · **fijo**
-
-El número total de slides depende de cuántos pregrados tenga la facultad. **La numeración y el
-contador se calculan solos**: se pueden añadir o quitar fichas sin tocar nada más.
-
-Las **fichas por programa** son el eje de la reunión: cada una lista, con semestre y simulador,
-las asignaturas del pregrado que entran tal cual y las que entran con adaptación. Ocupan unos
-10 de los ~26 minutos y sirven además como material para enviar después.
+5–14. Fichas por programa (10)
+15. Las tres asignaturas transversales
+16. Tres formas de llevar el simulador al curso
+17. Evidencia de aprendizaje
+18. Cierre y contacto
 
 ## Cómo verla
 
-Abre `index.html` en cualquier navegador. Navegación con flechas en pantalla, teclado
-(← →, espacio) y swipe en móvil. Las capturas se amplían al hacer clic.
-
-## Identidad visual
-
-Paleta tomada por muestreo del logo de Simuladores de Negocios Colombia: cyan `#16AAE2`,
-azul `#0E73B8` y los grises `#737170` / `#989998` / `#CECBCB`. **Es la identidad del
-distribuidor y no cambia según la universidad.** El detalle está en `CLAUDE.md`.
-
-## Tecnología
-
-HTML5 + CSS3 + JavaScript vanilla, todo embebido en `index.html`. Sin frameworks.
+Abre `index.html` en cualquier navegador (flechas, teclado ← → espacio, swipe).
+Para publicarla como Artifact: `node build-artifact.js` → `artifact.html`.
 
 ---
-
-Derivada del deck de la Universidad Santiago de Cali (agosto 2026), que sigue siendo el
-ejemplo completo de referencia.
 
 Simuladores de Negocios Colombia S.A.S. · Distribuidor autorizado CompanyGame

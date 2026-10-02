@@ -1,261 +1,166 @@
-# Plantilla — Presentación de mapeo curricular para una universidad
+# Universidad El Bosque · Mapeo curricular — documento de trabajo
 
-> **Esta carpeta es una PLANTILLA. No se edita: se copia.**
-> Para una universidad nueva: copia la carpeta completa, renómbrala
-> `<universidad>-mapeo-presentacion/` (p. ej. `unilibre-mapeo-presentacion/`) y trabaja allí.
-> Distribuidor: **Simuladores de Negocios Colombia** (Grupo Edutec).
+> Presentación comercial para **directores de programa y decanos** de la **Facultad de Ciencias
+> Económicas y Administrativas (FCEA)** de la Universidad El Bosque (Bogotá).
+> Creada el **2-oct-2026** desde `plantilla-mapeo-curricular/`. Distribuidor: Simuladores de
+> Negocios Colombia (Grupo Edutec).
+>
+> ⚠️ **Documento interno.** Lleva las cifras que el deck omite (cobertura, asignaturas sin
+> encaje). Si esta carpeta se sube a un repositorio **público**, no subas este archivo ni el Excel.
 
-## Qué presentación es esta
+## Fuente
 
-Es una pieza **comercial** para **directores de programa y decanos** de una facultad de
-ciencias económicas / administrativas. **No presenta un simulador**: presenta el resultado de
-haber leído el plan de estudios de la facultad, asignatura por asignatura, contra el catálogo
-CompanyGame, y muestra **qué asignaturas pueden trabajarse hoy con un simulador**, con cuál y
-en qué semestre.
+- Excel: `Universidad El Bosque - CG + otros simuladores SNC.xlsx` (copia en esta carpeta;
+  original en `C:\Users\simsy\Downloads\`). Revisado el **2-oct-2026** (versión de las 10:07, con las celdas de la columna M y la fila de Coffee Time ya corregidas; ver Salvedades 1 y 8). Actualizado por Claude a las 10:28 con la Salvedad 0 y el arreglo de M8; abre en Excel sin reparación y su Resumen recalculado coincide con el deck (117 / 81 / 36). Copia previa: `Universidad El Bosque - respaldo antes de parciales.xlsx`.
+- Hojas usadas: las 10 hojas de programa. Las cifras se **recontaron fila por fila**; la hoja
+  `Resumen` no se tomó tal cual (ver Salvedades).
+- **Alcance del deck: CompanyGame + otros simuladores SNC** (SimVenture Evolution, SimVenture
+  Validate, SimProject, SimAgile, Auditek, RentaSim), como indica el nombre del archivo. Para cada
+  asignatura se tomó el **mejor grado** entre la columna CG (F) y la columna SNC (K).
 
-No confundir con `C:\Users\simsy\Downloads\plantilla-presentacion\`, que es la plantilla de
-**bienvenida de un simulador** (FoodCompany, BusinessGlobal…) dirigida a estudiantes. Son dos
-géneros distintos, con público y objetivo distintos.
+## Cifras completas
 
-Origen: se derivó del deck de la Universidad Santiago de Cali
-(`C:\Users\simsy\Downloads\usc-implementacion-presentacion\`), que sigue siendo el mejor
-ejemplo completo de cómo queda rellena.
+### Lo que muestra el deck
 
-**Sincronización con el deck USC.** La plantilla va al día hasta el commit **`3a326bf`**
-(31-ago-2026, «Quita el acordeón del slide de las cinco asignaturas transversales»). Si el deck
-de la USC recibe más cambios de maqueta que valga la pena heredar, `git log 3a326bf..HEAD` en
-esa carpeta dice qué falta por traer. Los cambios de **datos** de la USC no se heredan nunca:
-aquí las cifras son tokens.
-
-## Cómo se construye una presentación nueva
-
-1. **Copiar** esta carpeta y renombrarla.
-2. Dar a Claude el **Excel del mapeo curricular** de esa universidad. Es la fuente de verdad:
-   de ahí salen todas las cifras.
-3. Claude **reemplaza los tokens `[[...]]`**, **duplica el bloque de ficha** una vez por
-   programa y rellena las tablas. Los slides marcados **FIJO** se conservan tal cual.
-4. Revisar los comentarios `<!-- VARIABLE · … -->` del HTML: cada uno dice qué va ahí.
-5. Borrar de este `CLAUDE.md` lo que no aplique y anotar el análisis de esa universidad
-   (ver **Qué documentar al rellenarla**, abajo).
-
-**Regla dura: no inventar cifras.** Todo número del deck sale del Excel. Si un dato no está en
-el Excel, no entra en el deck.
-
-## Estructura de slides
-
-El número de slides **depende del número de programas** de la facultad. Con 5 programas salen
-13; con 3, salen 11.
-
-| # | Slide | Tipo | Notas |
-|---|-------|------|-------|
-| 1 | Portada + contexto | **FIJO** (estructura) | Cifras del mapeo vía tokens; logo SDN |
-| 2 | Cartelera de simuladores | **FIJO** | `assets/cartelera.jpg` + `assets/avatares.png` |
-| 3 | Lo que ya se puede hacer hoy | variable | 4 tarjetas de cifra + el hallazgo que ordena la propuesta |
-| 4 | Alcance por programa | variable | `.data-table`, una fila por programa + fila de total |
-| **5…N** | **Ficha por programa** — bloque repetible | variable | **El eje de la reunión** |
-| N+1 | Asignaturas transversales | **condicional** | Cadena de semestres + tabla + 3 tarjetas. Solo si existe el hallazgo; si no, borrar |
-| N+2 | Los tres modelos de uso docente (A/B/C) | **FIJO** | Genérico, sirve igual en cualquier universidad |
-| N+3 | Evidencia de aprendizaje y acreditación | semi-fijo | Tabla del catálogo: dejar solo los simuladores que aparecen |
-| N+4 | Cierre / Gracias | **FIJO** | Los dos bloques de contacto, comercial primero |
-
-**Las fichas por programa son el eje.** Dos minutos cada una, unos 10 de los ~26 minutos de la
-reunión. Cada director se ve a sí mismo en pantalla: conviene dejar leer en silencio y no
-recitar las tablas. Todas tienen exactamente la misma estructura, para que se comparen solas.
-
-### Duplicar la ficha
-
-El bloque `id="slideFicha1"` va marcado en el HTML con
-`<!-- ===== BLOQUE REPETIBLE · FICHA POR PROGRAMA ===== -->`. Duplícalo entero una vez por
-programa y numera los id: `slideFicha1`, `slideFicha2`, `slideFicha3`… Los demás slides usan
-id semánticos (`slideTransversales`, `slideModelos`, `slideEvidencia`, `slideCierre`)
-precisamente para que añadir fichas no obligue a renumerar nada.
-
-**La numeración es automática.** Los `.slide-number` van vacíos y el JS los rellena `01`,
-`02`, `03… en orden de aparición; el contador del nav (`1 / N`) también se calcula solo. No
-hay que tocar nada al añadir o quitar slides. (Si escribes un número a mano, se respeta.)
-
-## Tokens a reemplazar (búscalos con `[[`)
-
-### Institución
-
-| Token | Qué es | Ejemplo (USC) |
-|---|---|---|
-| `[[UNIVERSIDAD]]` | Nombre completo | Universidad Santiago de Cali |
-| `[[UNIVERSIDAD_CORTA]]` | Sigla o nombre corto — va en el título y la portada | USC |
-| `[[FACULTAD]]` | Nombre completo de la facultad | Facultad de Ciencias Económicas y Empresariales |
-| `[[FACULTAD_CORTA]]` | Cómo se la nombra en el cuerpo del texto | Facultad |
-| `[[N_PROGRAMAS_TXT]]` | Nº de pregrados, en letra | cinco |
-| `[[N_PROGRAMAS_NUM]]` | Nº de pregrados, en cifra | 5 |
-
-### Cifras del mapeo (de la hoja Resumen del Excel)
-
-| Token | Qué es | Ejemplo (USC) |
-|---|---|---|
-| `[[N_ENCAJE]]` | Asignaturas con simulador (perfecto + parcial) | 69 |
-| `[[N_PERFECTO]]` | Encaje perfecto — entran sin tocar el temario | 39 |
-| `[[N_PARCIAL]]` | Encaje parcial — el docente adapta | 30 |
-| `[[N_SIMULADORES]]` | Simuladores distintos del catálogo que se usan | 27 |
-| `[[RANGO_SEMESTRES]]` | Rango de semestres cubierto | 1 – 9 |
-| `[[MIN_PERFECTO]]` / `[[MAX_PERFECTO]]` | Encajes perfectos del programa con menos / con más | 5 / 10 |
-
-### Tabla de alcance por programa (slide 4)
-
-Una fila por programa, con `[[PROGRAMA_1]]`, `[[P1_ENCAJE]]`, `[[P1_PERFECTO]]`,
-`[[P1_PARCIAL]]`, `[[P1_SIMULADORES]]`, `[[P1_SEMESTRES]]` — y lo mismo para `P2`, `P3`… La
-plantilla trae tres filas de ejemplo: **añade o borra hasta tener una por programa**, y ordena
-de más a menos asignaturas. `badge-green` arriba, `badge-teal` abajo.
-
-### Ficha de programa (bloque repetible)
-
-| Token | Qué es |
+| Cifra | Valor |
 |---|---|
-| `[[PROGRAMA]]` | Nombre del pregrado |
-| `[[FICHA_N]]` | Número de ficha (1, 2, 3…) |
-| `[[PROG_ENCAJE]]` · `[[PROG_PERFECTO]]` · `[[PROG_PARCIAL]]` · `[[PROG_SIMULADORES]]` | La tira de cuatro cifras |
-| `[[SEM]]` · `[[ASIGNATURA]]` · `[[SIMULADOR]]` · `[[NIVEL]]` | Una fila de tabla. Repetir por asignatura, ordenadas por semestre |
-| `[[PARRAFO_PROGRAMA]]` | «Lo que gana el programa»: 4–6 líneas leyendo la ficha en voz alta |
+| Asignaturas con simulador | **117** |
+| Aplicación directa (encaje perfecto) | **81** |
+| Como apoyo al curso (encaje parcial) | **36** |
+| Simuladores distintos | **27** (21 CompanyGame + 6 SNC) |
+| Semestres cubiertos | **1 – 6** |
+| Programas / mallas | **10** |
+| Encajes perfectos por programa | mín. 6 (Economía) · máx. 10 (Marketing) |
+| Asignaturas transversales (perfecto en los 10) | **3** |
 
-### Narrativa
+### Lo que el deck omite (para responder de viva voz)
 
-| Token | Qué es |
-|---|---|
-| `[[TITULO_HALLAZGO]]` · `[[PARRAFO_HALLAZGO]]` | El hallazgo que ordena la propuesta (slide 3) |
-| `[[N_TRANSVERSALES_TXT]]` | Nº de asignaturas transversales, en letra |
-| `[[HITO_1..3]]` · `[[HITO_1..3_DESC]]` | Los tres eslabones del `.value-chain` de transversales |
-| `[[LLAMADA_A_LA_ACCION]]` | La frase de cierre. Una línea, concreta |
+| Programa | Materias en malla | Con simulador | Perfecto | Parcial | Sin encaje | Cobertura | Solo CG (P/p) |
+|---|---|---|---|---|---|---|---|
+| Negocios Internacionales (Presencial) | 64 | 15 | 9 | 6 | 49 | 23,4 % | 9 / 3 |
+| Negocios Internacionales (Virtual) | 64 | 15 | 9 | 6 | 49 | 23,4 % | 9 / 3 |
+| Marketing y Transformación Digital | 66 | 14 | 10 | 4 | 52 | 21,2 % | 9 / 3 |
+| Finanzas | 66 | 12 | 8 | 4 | 54 | 18,2 % | 8 / 3 |
+| Administración de Empresas (Virtual) | 66 | 11 | 7 | 4 | 55 | 16,7 % | 6 / 4 |
+| Administración de Negocios Sostenibles (Virtual) | 66 | 11 | 9 | 2 | 55 | 16,7 % | 7 / 2 |
+| Administración de Empresas (Presencial) | 66 | 11 | 7 | 4 | 55 | 16,7 % | 6 / 4 |
+| Adm. de Producción y Logística Internacional | 65 | 10 | 8 | 2 | 55 | 15,4 % | 7 / 2 |
+| Contaduría Pública | 66 | 10 | 8 | 2 | 56 | 15,2 % | 6 / 2 |
+| Economía | 65 | 8 | 6 | 2 | 57 | 12,3 % | 6 / 2 |
+| **Total** | **654** | **117** | **81** | **36** | **537** | **17,9 %** | **73 / 28** |
 
-## Criterio editorial — importante
+- Solo con CompanyGame serían **101** asignaturas (73 + 28, 15,4 %). Los simuladores SNC suman
+  **16** asignaturas que CG no cubre.
+- Las 654 son filas de malla, no asignaturas únicas: el Ciclo de Fundamentación (sem. I–II) es
+  idéntico en los 10 programas y se cuenta en cada uno.
+- **Semestres VII y VIII no aparecen**: VII es Práctica Empresarial / Práctica Social y VIII son
+  bloques de énfasis + Trabajo de Grado + Electiva, de contenido variable y no evaluables en el
+  mapeo. Si preguntan «¿y el final de la carrera?», esa es la respuesta.
+- Vacíos más visibles (por si preguntan): Economía (Micro/Macro I–IV, Econometrics, Cálculo,
+  Métodos Matemáticos) y el núcleo normativo de Contaduría (Tributaria II, Derecho Aduanero y
+  Fiscal, cursos «International…» IFRS/auditoría). El tronco común (Idiomas, Instituciones
+  Políticas, Bioética, Seminario de Trabajo de Grado, Electivas) tampoco tiene simulador.
 
-Esta es una **pieza comercial**, y el deck de la USC fijó un criterio que conviene mantener:
-**se argumenta desde el beneficio de lo que sí encaja, sin exponer los vacíos del catálogo.**
+## Salvedades
 
-En concreto, el deck **no** muestra:
+0. **Decisión de Paula (2-oct-2026): tres simuladores bajan a encaje parcial** en todos los
+   programas donde aparecen, aunque el Excel los marca «Encaje perfecto»:
+   - **Coffee Time** en *Fundamentos de Marketing y Transformación Digital* (10 programas).
+   - **Fitness Gym** en *Emprendimiento y Creación de Empresa* (10 programas). Por decisión
+     expresa, la asignatura queda **parcial en los 10**: también se bajó a parcial **SimVenture
+     Validate** en las 4 mallas donde el Excel lo daba perfecto (Negocios Sostenibles,
+     Contaduría, Economía, Finanzas).
+   - **BankCompany** en *International Finance* (Finanzas, NI Presencial, NI Virtual).
+   En total, 27 celdas de grado (10 + 10 + 4 + 3) y 23 asignaturas pasan de perfecto a parcial:
+   104 / 13 → **81 / 36**. Las transversales con encaje perfecto en los 10 bajan de 5 a **3**.
+   **Aplicado también en el Excel** (2-oct-2026, 10:28): columnas F y K pasadas a «Encaje
+   parcial» con su color, valor de M actualizado y Resumen recalculado.
+1. **Columna M «Cobertura combinada»: corregida el 2-oct-2026.** La versión original tenía 7 celdas con
+   referencias desplazadas o `#REF!` (AE Presencial M30 y M43; AE Virtual M30 y M43; Producción y
+   Logística M30, M43 y M44), y el Resumen daba 100 perfecto + 16 parcial. Ya están bien.
+   Al mover Coffee Time de la fila 8 a la 9 quedó una octava: **M8** de AE Presencial leía `F9`
+   (*Teoría de los Negocios Internacionales* salía «Encaje perfecto»). Corregida a `F8` el
+   2-oct-2026, 10:28. El deck no lee la columna M: recalcula el mejor grado entre F y K.
+2. **Auditek y RentaSim** (nuevos desarrollos). En el deck llevan la etiqueta **«Nuevo SNC»** en
+   lugar de nivel CG, porque no tienen equivalencia en esa escala.
+   - **RentaSim — validado** contra su presentación para docentes
+     (github.com/paula-praxilab/rentasim-presentacion · simulador-rentasim.simuladordenegocios.co):
+     simulador de PraxiLab de conciliación fiscal y declaración de renta, para pregrado de
+     Contaduría, cursos de tributaria; individual, 15–20 h, año gravable 2025, 3 casos (A
+     manufactura, B servicios TI, C agroindustria). Encaje perfecto en **Tributaria I** (Caso A =
+     «primer espacio tributario») y parcial en **Planeación Fiscal** (Finanzas). Tiene fila en la
+     tabla de evidencia.
+   - **Auditek — validado** contra el repositorio privado `praxilab/auditek` (rama dev; app en
+     auditek.vercel.app): simulador de auditoría financiera externa para el pregrado de Contaduría
+     Pública, producto de PraxiLab / Grupo Edutec. Encargo completo en 5 fases bajo las NIA
+     (aceptación, planeación y riesgos, ejecución, conclusión, dictamen), equipos de 3 a 5 con
+     roles, agentes IA (cliente y socio), niveles Junior / Senior / Gerente-Socio, nota 70 %
+     automática + 30 % docente. Encaje perfecto en **Revisoría Fiscal** (Contaduría). Tiene fila en
+     la tabla de evidencia.
+     ⚠️ **Estado (según `docs/07-roadmap.md`, sept-2026):** MVP construido, solo el cliente
+     Automotores del Caribe activo durante la validación con docentes; piloto con universidad
+     aliada y lanzamiento comercial «por planear»; verificación de la marca «AudiTek» pendiente.
+     **Decisión (Paula, 2-oct-2026): se deja como está, «se puede trabajar hoy».** Auditek entra
+     en el deck igual que los demás simuladores. Si algún día hubiera que quitarlo, el deck
+     quedaría en 116 / 103 / 13 y 26 simuladores.
+3. En Contaduría, «Renta Sim» y «Auditek» estaban escritos en la columna de **simulador CG** con
+   grado «No encaja»; se trataron como simuladores SNC (columna I).
+4. Nombres normalizados contra el catálogo: «CoffeeTime» / «Coffee Time» → **Coffee Time**;
+   «Trading (Real Market Stocks)» → **Trading**.
+5. Niveles SNC llevados a la escala CG para los badges: SimVenture Validate ≈N1-2, SimVenture
+   Evolution ≈N1-4, SimProject / SimAgile ≈N3-5.
+6. En *Emprendimiento y Creación de Empresa* la ficha muestra **Fitness Gym + SimVenture
+   Validate** donde el Excel propone Validate como complemento (AE P/V, APL, ANS, Contaduría,
+   Economía, Finanzas). La asignatura cuenta una sola vez.
+7. *Project Management* (AE P/V, APL, ANS) lleva **SimProject + SimAgile** juntos, como propone
+   el Excel; cuentan como 2 simuladores distintos.
+8. **AE Presencial · Coffee Time: corregido el 2-oct-2026.** En el original, *Fundamentos de
+   Marketing y Transformación Digital* figuraba como «No encaja» en AE Presencial y con Coffee Time en
+   las otras 9 mallas. Ya está corregido en la fila 9: AE Presencial = AE Virtual (11 / 9 / 2) y
+   Coffee Time es transversal en los 10 programas.
+9. Las notas metodológicas del Resumen citan porcentajes antiguos (25,0 %, 28,8 %, 16,7 %…) que no
+   coinciden con la tabla. No usarlos.
+10. La posición semestral de las materias disciplinares (sem. III–VI) se reconstruyó desde la
+    grilla del PDF: puede haber ±1 semestre de imprecisión puntual (nota del Excel).
 
-- El **porcentaje de cobertura** ni el total de asignaturas analizadas. Se dice
-  «69 asignaturas con simulador», nunca «69 de 231».
-- Cuántas asignaturas **no** tienen encaje, ni cuáles son los vacíos del catálogo.
-- Ningún ranking que deje un programa señalado en rojo por tener poca cobertura.
+## Cambios respecto a la plantilla
 
-Todas las cifras que aparecen son ciertas y salen del Excel. Lo que se omite es el
-**denominador**, no se altera ningún dato.
+- **10 fichas** (`slideFicha1`…`slideFicha10`), ordenadas igual que la tabla de alcance (de más a
+  menos asignaturas). Total: **18 slides**. Es larga: con 2 min por ficha son ~20 min solo de
+  fichas. Si la reunión es corta, NI Virtual repite exactamente NI Presencial y se puede pasar
+  rápido.
+- **Slide de transversales conservado**: 3 asignaturas con encaje perfecto en los 10 programas
+  (Contabilidad General · ContaTrainer · S1; Principios de Administración y Organizaciones ·
+  T-Shirt · S1; Procesos Administrativos · Energy&Co · S2). Coffee Time (Fundamentos de
+  Marketing), Fitness Gym (Emprendimiento) y Business Global (Habilidades de Dirección) están en
+  los 10 pero no con encaje perfecto en todos, así que el hallazgo del slide 3 los menciona aparte.
+- Textos de plantilla ajustados porque no aplicaban aquí:
+  - «de primer a último semestre» / «asignaturas de síntesis» → **de primer a sexto semestre**.
+  - Se quitó «no requiere comprar nada nuevo — todo sale del catálogo al que ya tiene acceso» y
+    «del catálogo al que ya tienen acceso» de la portada: no consta que la U. El Bosque tenga
+    acceso hoy, y los SNC/nuevos desarrollos no forman parte del catálogo CG.
+  - «pregrados» → «programas» donde se cuenta 10 (son 8 pregrados, dos en dos modalidades).
+  - Slide 2: los simuladores destacados son los 6 presentes en los 10 programas, y se nombran los
+    6 SNC.
+- **Evidencia de aprendizaje**: se quitaron FOCUS, Advisor Jr., Business Strategy, InnovaTech,
+  MarketGame y Business Chef (no aparecen); se añadieron filas para Bankgame/BankCompany,
+  TechCompany, Business21/Business Global, Avocado Expand/Inter Pyme, Business Advance,
+  SimVenture, SimProject/SimAgile, RentaSim y Auditek. ESG Management → ESG Project.
 
-**Al preparar la reunión hay que tenerlo presente:** los directores tienen sus propias mallas y
-pueden hacer la resta. Si preguntan por la cobertura o por una asignatura concreta que no
-aparece, la respuesta honesta debe estar escrita en el `CLAUDE.md` de esa presentación y en el
-Excel, lista para darla de viva voz.
+## Criterio editorial y tono
 
-Si en algún encargo se pide el enfoque contrario (diagnóstico completo, con vacíos y
-porcentajes), hay que decirlo explícitamente y rehacer los slides 3 y 4 — la plantilla no lo
-trae.
-
-## Qué documentar al rellenarla
-
-El `CLAUDE.md` de cada presentación es el **documento de trabajo**, no el deck. Debe llevar:
-
-- La ruta del Excel fuente y su fecha de revisión.
-- Las cifras completas, **incluidas las que el deck omite** (cobertura, asignaturas sin encaje).
-- Las salvedades: asignaturas sin grado de ajuste, inconsistencias de escritura del Excel,
-  simuladores del catálogo que se normalizaron.
-- Qué slides se eliminaron o añadieron respecto a esta plantilla, y por qué.
-- ⚠️ Si el repositorio va a ser **público**, revisar que ese archivo no exponga nada que no
-  deba salir de la casa.
-
-## Paleta — identidad Simuladores de Negocios Colombia
-
-**No se cambia por universidad.** El deck lleva la identidad del distribuidor, no la de la
-institución. Los colores se extrajeron por muestreo de píxeles de `assets/logo-sdn-color.png`:
-si hay que retocar, volver a muestrear, no aproximar a ojo.
-
-| Rol | Hex | Origen |
-|---|---|---|
-| Cyan de marca (`--primary`) | `#16AAE2` | texto «SIMULADORES» e isotipo |
-| Azul de marca (`--primary-dark`) | `#0E73B8` | faceta superior del isotipo |
-| Cyan claro (`--primary-light`) | `#5FC7EE` | derivado |
-| Azul medio (`--amber`) | `#0F86C9` | 2.º stop de los degradados |
-| Azul profundo (`--cg-blue`) | `#0A5488` | derivado |
-| Gris de marca (`--gray`) | `#737170` | texto «de negocios» |
-| Gris medio / claro | `#989998` · `#CECBCB` | facetas del isotipo |
-
-Acentos derivados, todos fríos para que la escala siga leyéndose: verde azulado `#2FA37A`
-(alto) · teal `#0F8CA8` · gris de marca (medio) · azul-violeta `#6E7FC4` · rojo apagado
-`#D9636E` (bajo / alerta).
-
-El slot que en la plantilla de simuladores era **ámbar** (`cb-amber`, `factor-amber`,
-`badge-amber`) está reasignado al **gris de marca**: es el único valor medio/neutro y así no
-entra ningún color cálido. El **rojo es el único acento cálido** y se reserva para el valor más
-bajo — en esta plantilla no se usa, porque el criterio editorial es no señalar programas.
-
-**Convención de las fichas:** verde = encaje perfecto · gris de marca (ámbar) = encaje parcial.
-Es la misma de las tarjetas del slide 3, y no debe romperse.
-
-Badges de nivel del simulador: `badge-green` N1-2 · `badge-teal` N3-4 · `badge-amber` N4-5 ·
-`badge-orange` N5 · `badge-purple` N6-7.
-
-## Assets
-
-| Archivo | Qué es |
-|---|---|
-| `assets/logo-sdn.png` | Logo **blanco**. Intro, portada y cierre, siempre sobre el degradado cyan |
-| `assets/logo-sdn-color.png` | Logo **a color**. Referencia de marca y usos sobre fondo blanco |
-| `assets/cartelera.jpg` | Portafolio CompanyGame (slide 2) |
-| `assets/avatares.png` | Avatares de IA (slide 2). Si falta, el slide lo oculta solo |
-
-Los cuatro son **fijos**: no dependen de la universidad. Toda captura nueva va en `.jpg`, con
-nombre descriptivo, `loading="lazy"` y `onclick="openLightbox('assets/x.jpg','Título')"`. No
-fijar `width`/`height` inline.
-
-## Componentes disponibles (ya en el CSS)
-
-`.card-grid` / `.card-grid.cols4` + `.card` (`bd-green/amber/teal/purple/red`) · `.data-table` ·
-`.value-chain` + `.chain-box` (`cb-amber/green/teal`) · `.factor-accordion` + `.factor-item`
-(`factor-orange/amber/green/teal`) · `.two-col` · `.seg-row` · `.badge` · `.accordion` (FAQ) ·
-`.method` · `.brand-logo` · `.contact-label` / `.contact-sep` · `.reserved` (bloque de aviso).
-
-**De las fichas por programa:** `.fk-row` + `.fk` (`fk-green` / `fk-amber` / `fk-blue`) para la
-tira de cuatro cifras, con `.fk-n` y `.fk-l` dentro · `.fk-h` (`fk-h-green` / `fk-h-amber`)
-para los títulos de columna · `.ficha-tbl` sobre `.data-table` (semestre centrado en
-Montserrat, badges de nivel más pequeñas).
-
-Las cabeceras (`.slide-header h1` / `h2`) llevan `padding-right: 150px` para que el número
-gigante de la esquina no pise los subtítulos largos.
-
-Hay CSS de componentes que la plantilla no usa hoy (`.method`, `.tl-*`, `.features`, `.ideal`,
-`.accordion`, `.phone-mock`, `.plataforma-cols`, `.ingreso-list`, `.percentage-*`,
-`.factor-block`) y las funciones `toggleAccordion()` / `toggleFactor()`. Se conservan a
-propósito: son los slides de Métodos de Implementación, FAQ, Ingreso a la Plataforma y barras
-de porcentaje, por si alguna presentación los necesita.
-
-## Salvedades que deben mantenerse en el discurso
-
-- Los compromisos de servicio del acompañamiento son un **marco propuesto**, no una oferta
-  verificada.
-- Lo que reporta la plataforma CompanyGame debe confirmarse contra el panel real del docente.
-- La clasificación de cada asignatura proviene del Excel del mapeo, no de un criterio propio.
-- ⚠️ La URL **plataforma.companygame.net no aparece en ningún slide** (el deck de la USC quitó
-  el slide de ingreso). Si la audiencia la necesita, reponerla en el bloque de contacto del
-  cierre.
+Heredados de la plantilla: sin porcentajes ni denominador, sin vacíos del catálogo, sin rankings
+en rojo; el simulador se adapta al curso del docente («de aplicación directa» / «como apoyo al
+curso»). Paleta SDN sin cambios. No tocar el `<script>`.
 
 ## Datos fijos del distribuidor
 
-- Plataforma: **https://plataforma.companygame.net/**
-- **Comercial** (ventas): **ventas@simuladoresdenegocios.co** · WhatsApp **315 975 6987**
-- **Fidelización** (acompañamiento): **fidelizacion@simuladoresdenegocios.co** ·
-  WhatsApp **301 790 3086**
-- El slide de cierre muestra **los dos bloques**, comercial primero. No mezclarlos.
-- Distribuidor: Simuladores de Negocios Colombia (Grupo Edutec)
+- Plataforma: https://plataforma.companygame.net/ (no aparece en ningún slide)
+- Comercial: ventas@simuladoresdenegocios.co · WhatsApp 318 975 6987
+- Fidelización: fidelizacion@simuladoresdenegocios.co · WhatsApp 301 790 3086
 
-## Tecnología
-
-HTML5 + CSS3 + JS vanilla, todo embebido en `index.html`. Sin frameworks ni dependencias.
-Navegación por flechas, teclado (← → espacio) y swipe ya implementada; lightbox en las
-imágenes. No tocar el `<script>`.
-
-`build-artifact.js` genera la versión publicable como **Artifact de Claude**: quita el
-esqueleto del documento e incrusta las imágenes de `assets/` como `data:` URI.
+## Publicar
 
 ```bash
-node build-artifact.js            # escribe ./artifact.html
-node build-artifact.js salida.html
+node build-artifact.js     # escribe ./artifact.html con las imágenes incrustadas
 ```
-
-Falla a propósito si queda alguna referencia a `assets/` sin incrustar.
