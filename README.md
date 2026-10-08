@@ -8,12 +8,12 @@ un simulador CompanyGame o de Simuladores de Negocios Colombia, con cuál y en q
 
 ## Cifras de portada
 
-- **117 asignaturas** con simulador · **81** de aplicación directa · **36** como apoyo al curso
-- **27 simuladores** (21 CompanyGame + 6 SNC)
+- **114 asignaturas** con simulador · **79** de aplicación directa · **35** como apoyo al curso
+- **28 simuladores** (21 CompanyGame + 7 SNC)
 - **10 programas**, semestres **1 a 6**
 - **3 asignaturas transversales** con encaje perfecto en los 10 programas
 
-Fuente: `Universidad El Bosque - CG + otros simuladores SNC.xlsx` (revisado 2-oct-2026).
+Fuente: `Universidad El Bosque - CG + otros simuladores SNC.xlsx` (revisado 8-oct-2026).
 Detalle, cifras completas y salvedades en `CLAUDE.md` (documento interno).
 
 ## Contenido — 18 slides
